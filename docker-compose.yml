@@ -8,6 +8,7 @@ services:
       - '445:445'
     volumes:
       - './samba.conf:/samba.conf'
-      - '${MNT:?err}:/mnt/time-machine/'
-    command: "-p -I /samba.conf -u \"${USER:?err};${PASS:?err}\" -s \"samba;/mnt/time-machine/;yes;no;no;$USER\""
+      - '${MNT1:?err}:/mnt/time-machine/'
+      - '${MNT2:?err}:/mnt/backup/'
+    command: "-p -I /samba.conf -u \"${USER1:?err};${PASS1:?err}\" -u \"${USER2:?err};${PASS2:?err}\" -s \"timemachine;/mnt/time-machine/;yes;no;no;$USER1\" -s \"backup;/mnt/backup/;yes;no;no;$USER2\""
     image: dperson/samba
